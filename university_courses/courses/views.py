@@ -11,7 +11,7 @@ from django.db.models import Avg
 
 
 class UniversityViewSet(ModelViewSet):
-    queryset = University.objects.all()
+    queryset = University.objects.order_by('-id')
     serializer_class = UniversitySerializer
 
     @action(detail=True, url_path="courses",
@@ -34,7 +34,7 @@ class UniversityViewSet(ModelViewSet):
 
 
 class UniversityCourseViewSet(ModelViewSet):
-    queryset = UniversityCourse.objects.all()
+    queryset = UniversityCourse.objects.order_by('-id')
     serializer_class = UniversityCourseSerializer
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     search_fields = ["course__title__contains", "university__name__contains"]
@@ -45,7 +45,7 @@ class UniversityCourseViewSet(ModelViewSet):
     ordering_fields = ["duration_weeks"]
 
 class CourseViewSet(ModelViewSet):
-    queryset = Course.objects.all()
+    queryset = Course.objects.order_by('-id')
     serializer_class = CourseSerializer
 
 
